@@ -1,15 +1,25 @@
 export const BOT_PERMISSION_BITS = {
+  KickMembers: 1n << 1n,
+  BanMembers: 1n << 2n,
+  ManageChannels: 1n << 4n,
   ViewChannel: 1n << 10n,
   SendMessages: 1n << 11n,
+  ManageMessages: 1n << 13n,
   EmbedLinks: 1n << 14n,
+  ModerateMembers: 1n << 40n,
 } as const;
 
 export type BotPermissionName = keyof typeof BOT_PERMISSION_BITS;
 
 export const BOT_PERMISSION_LABELS: Record<BotPermissionName, string> = {
+  KickMembers: 'Kick Members',
+  BanMembers: 'Ban Members',
+  ManageChannels: 'Manage Channels',
   ViewChannel: 'View Channels',
   SendMessages: 'Send Messages',
+  ManageMessages: 'Manage Messages',
   EmbedLinks: 'Embed Links',
+  ModerateMembers: 'Timeout Members',
 };
 
 export interface FeatureBotPermissionAction {

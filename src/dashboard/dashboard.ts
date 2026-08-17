@@ -1,10 +1,12 @@
 import type { GuildConfigSnapshot, GuildSummary, PluginStatus, UnixTimestamp } from '../common/base';
+import type { GuildAccessLevel } from './enforcement';
 
 export interface ListGuildsResponse {
   guilds: GuildSummary[];
 }
 
 export interface DashboardGuildSummary extends GuildSummary {
+  accessLevel: GuildAccessLevel;
   ownerDiscordId?: string;
   ownerDisplayName?: string;
   premiumActive: boolean;

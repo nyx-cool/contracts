@@ -76,6 +76,7 @@ are plain strings; routes with parameters are functions.
 | --- | --- | --- |
 | Health | `health` | `/api/control/health` |
 | Public | `publicStats` | `/api/control/public-stats` |
+| Dashboard | `dashboardActorCapabilities` | `/api/control/dashboard/actor-capabilities` |
 | Dashboard | `dashboardMaintenance` | `/api/control/dashboard/maintenance` |
 | Dashboard | `dashboardGuilds` | `/api/control/dashboard/guilds` |
 | Dashboard | `dashboardUpdateAnnouncements` | `/api/control/dashboard/update-announcements` |

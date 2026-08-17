@@ -1,10 +1,18 @@
 export const CONTROL_PLANE_ROUTES = {
   health: '/api/control/health',
   publicStats: '/api/control/public-stats',
+  dashboardActorCapabilities: '/api/control/dashboard/actor-capabilities',
   dashboardMaintenance: '/api/control/dashboard/maintenance',
   dashboardUpdateAnnouncements: '/api/control/dashboard/update-announcements',
   dashboardDeveloperAnalytics: '/api/control/dashboard/developer-analytics',
   dashboardDeveloperGuildInventory: '/api/control/dashboard/developer-guild-inventory',
+  enforcementCapability: '/api/control/enforcement/capability',
+  guildEnforcement: (guildId: string) =>
+    `/api/control/enforcement/guilds/${encodeURIComponent(guildId)}`,
+  guildEnforcementSuspend: (guildId: string) =>
+    `/api/control/enforcement/guilds/${encodeURIComponent(guildId)}/suspend`,
+  guildEnforcementRestore: (guildId: string) =>
+    `/api/control/enforcement/guilds/${encodeURIComponent(guildId)}/restore`,
   updateAnnouncements: '/api/control/updates/announce',
   guilds: '/api/control/guilds',
   dashboardGuilds: '/api/control/dashboard/guilds',
@@ -18,6 +26,8 @@ export const CONTROL_PLANE_ROUTES = {
   guildHoneypot: (guildId: string) => `/api/control/guilds/${guildId}/honeypot`,
   guildAutomodRaidMode: (guildId: string) => `/api/control/guilds/${guildId}/automod/raid-mode`,
   guildProgression: (guildId: string) => `/api/control/guilds/${guildId}/progression`,
+  guildProgressionLeaderboard: (guildId: string) =>
+    `/api/control/guilds/${guildId}/progression/leaderboard`,
   guildStatistics: (guildId: string) => `/api/control/guilds/${guildId}/statistics`,
   guildTickets: (guildId: string) => `/api/control/guilds/${guildId}/tickets`,
   guildTicketQueue: (guildId: string) => `/api/control/guilds/${guildId}/tickets/queue`,

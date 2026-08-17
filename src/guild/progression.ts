@@ -28,6 +28,7 @@ export interface ProgressionGuildConfig {
   rewardRoleMode: ProgressionRewardRoleMode;
   rewardRoles: ProgressionRewardRoleConfig[];
   announcement: ProgressionAnnouncementConfig;
+  publicLeaderboard: boolean;
 }
 
 export interface ProgressionLocalizedDefaults {
@@ -54,6 +55,32 @@ export interface ProgressionLeaderboardEntry {
   level: number;
   totalXp: number;
   rank: number;
+}
+
+export interface ProgressionPublicLeaderboardEntry {
+  rank: number;
+  displayName: string;
+  avatarUrl: string | null;
+  roleName: string | null;
+  roleColor: string | null;
+  level: number;
+  totalXp: number;
+  /** Progress toward the next level, 0-100. */
+  levelProgressPercent: number;
+}
+
+export interface ProgressionPublicLeaderboardStats {
+  rankedMembers: number;
+  totalXp: number;
+  highestLevel: number;
+}
+
+export interface GetGuildProgressionLeaderboardResponse {
+  guildId: string;
+  guildName: string;
+  guildIconUrl: string | null;
+  stats: ProgressionPublicLeaderboardStats;
+  entries: ProgressionPublicLeaderboardEntry[];
 }
 
 export interface ProgressionAnnouncementPreviewData {
