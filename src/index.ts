@@ -38,4 +38,5 @@ export * from './dashboard/actorCapabilities';
 export * from './dashboard/dashboard';
 export * from './dashboard/enforcement';
 export * from './dashboard/publicStats';
+export * from './dashboard/userProfiles';
 export * from './dashboard/updateAnnouncements';

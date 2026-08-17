@@ -1,6 +1,7 @@
 export const CONTROL_PLANE_ROUTES = {
   health: '/api/control/health',
   publicStats: '/api/control/public-stats',
+  userProfiles: '/api/control/users/profiles',
   dashboardActorCapabilities: '/api/control/dashboard/actor-capabilities',
   dashboardMaintenance: '/api/control/dashboard/maintenance',
   dashboardUpdateAnnouncements: '/api/control/dashboard/update-announcements',
