@@ -111,3 +111,8 @@ are plain strings; routes with parameters are functions.
 ```bash
 bun run typecheck   # tsc --noEmit
 ```
+
+## License
+
+MIT — see [LICENSE](LICENSE). The bot and dashboard that consume this package
+are not public; only the contract is.
