@@ -242,12 +242,19 @@ export interface TicketAnalyticsSummary {
   averageWordsPerTicket: number | null;
   last30DaysOpenedTickets: number;
   last30DaysClosedTickets: number;
+  /** Openers who submitted a close-time rating. Null when none exist yet. */
+  ratingCount: number;
+  averageRating: number | null;
 }
+
+/** How many openers chose each star, keyed '1' through '5'. */
+export type TicketRatingDistribution = Record<'1' | '2' | '3' | '4' | '5', number>;
 
 export interface GetGuildTicketAnalyticsResponse {
   guildId: string;
   premiumActive: boolean;
   summary: TicketAnalyticsSummary;
+  ratingDistribution: TicketRatingDistribution;
   topCategories: TicketAnalyticsCategoryStat[];
   topSupportMembers: TicketAnalyticsSupportMemberStat[];
   volume: TicketAnalyticsVolumePoint[];
@@ -318,6 +325,12 @@ export interface TicketCategoryConfig {
   requireOpenerAcknowledgement: boolean;
   onOpenMessages: TicketIntakeEmbedConfig[];
   formFields: TicketIntakeFormFieldConfig[];
+  /**
+   * Questions shown in a modal after the opener rates a closed ticket.
+   * Mirrors the intake `formFields` shape so the same editor serves both.
+   * Empty means the star rating is recorded without a follow-up modal.
+   */
+  closeFeedbackFields: TicketIntakeFormFieldConfig[];
   defaultTags: string[];
 }
 
@@ -361,12 +374,18 @@ export interface TicketSlaConfig {
   autoCloseMinutes: number | null;
 }
 
+export interface TicketRatingsConfig {
+  /** DM the opener a star-rating prompt when their ticket closes. */
+  enabled: boolean;
+}
+
 export interface TicketGuildConfig {
   panel: TicketPanelConfig;
   header: TicketHeaderEmbedConfig;
   logging: TicketLoggingConfig;
   limits: TicketLimitsConfig;
   sla: TicketSlaConfig;
+  ratings: TicketRatingsConfig;
   categories: TicketCategoryConfig[];
 }
 
