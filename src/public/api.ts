@@ -36,6 +36,12 @@ export interface PublicGuildSummary {
   name: string;
   iconUrl: string | null;
   memberCount: number;
+  /**
+   * Whether nyx+ is active on this server. The list endpoint includes owned
+   * servers without nyx+ with this flag false, rather than hiding them, so a
+   * missing subscription is visible instead of looking like a missing server.
+   */
+  premiumActive: boolean;
   /** Plugins currently enabled, which determines what else is readable. */
   enabledPlugins: string[];
 }
