@@ -105,6 +105,8 @@ export const PUBLIC_API_LIMITS = {
   requestsPerMinute: 60,
   /** Requests per day per key. */
   requestsPerDay: 10_000,
+  /** Live keys one owner may hold at once. */
+  keysPerOwner: 5,
 } as const;
 
 /* ── Ticket queue ─────────────────────────────────────────────────── */
@@ -167,3 +169,27 @@ export interface GetPublicDiagnosticsResponse {
   };
   plugins: PublicPluginDiagnostic[];
 }
+
+/* ── Key management ───────────────────────────────────────────────── */
+
+/**
+ * A key as the dashboard shows it. The secret itself appears exactly once,
+ * in the create response, and is never retrievable afterwards - only the
+ * prefix is stored in a readable form.
+ */
+export interface ApiKeySummary {
+  id: string;
+  name: string;
+  /** Leading characters of the key, for telling keys apart in a list. */
+  keyPrefix: string;
+  createdAt: number;
+  lastUsedAt: number | null;
+}
+
+export interface CreateApiKeyResult {
+  summary: ApiKeySummary;
+  /** Shown once, then unrecoverable. */
+  key: string;
+}
+
+export const API_KEY_NAME_MAX_LENGTH = 40;
