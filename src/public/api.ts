@@ -100,3 +100,64 @@ export const PUBLIC_API_LIMITS = {
   /** Requests per day per key. */
   requestsPerDay: 10_000,
 } as const;
+
+/* ── Ticket queue ─────────────────────────────────────────────────── */
+
+export interface PublicTicketQueueItem {
+  channelId: string;
+  channelName: string;
+  categoryId: string;
+  categoryName: string;
+  /** Member who opened the ticket. In the caller's own server by definition. */
+  openerId: string;
+  claimerId: string | null;
+  status: string;
+  createdAt: number;
+  lastActivityAt: number;
+  ageSeconds: number;
+}
+
+export interface GetPublicTicketQueueResponse {
+  guildId: string;
+  summary: {
+    totalOpen: number;
+    unclaimed: number;
+    responseOverdue: number;
+    inactivityWarningDue: number;
+    autoCloseDue: number;
+  };
+  queue: PublicTicketQueueItem[];
+}
+
+/* ── Honeypot ─────────────────────────────────────────────────────── */
+
+export interface GetPublicHoneypotStatsResponse {
+  guildId: string;
+  /** Total members moderated across the guild since setup. */
+  totalModerated: number;
+  /** Moderated count keyed by trap channel id. */
+  perChannel: Record<string, number>;
+}
+
+/* ── Diagnostics ──────────────────────────────────────────────────── */
+
+export interface PublicPluginDiagnostic {
+  plugin: string;
+  status: 'healthy' | 'warning' | 'error';
+  issues: Array<{
+    code: string;
+    severity: 'warning' | 'error';
+    message: string;
+  }>;
+}
+
+export interface GetPublicDiagnosticsResponse {
+  guildId: string;
+  summary: {
+    totalIssues: number;
+    warningCount: number;
+    errorCount: number;
+    affectedPluginCount: number;
+  };
+  plugins: PublicPluginDiagnostic[];
+}

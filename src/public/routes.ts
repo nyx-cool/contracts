@@ -14,4 +14,7 @@ export const PUBLIC_API_ROUTES = {
     `/v1/guilds/${encodeURIComponent(guildId)}/progression/members/${encodeURIComponent(userId)}`,
   ticketAnalytics: (guildId: string) =>
     `/v1/guilds/${encodeURIComponent(guildId)}/tickets/analytics`,
+  ticketQueue: (guildId: string) => `/v1/guilds/${encodeURIComponent(guildId)}/tickets/queue`,
+  honeypotStats: (guildId: string) => `/v1/guilds/${encodeURIComponent(guildId)}/honeypot/stats`,
+  diagnostics: (guildId: string) => `/v1/guilds/${encodeURIComponent(guildId)}/diagnostics`,
 } as const;
