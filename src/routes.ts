@@ -29,6 +29,8 @@ export const CONTROL_PLANE_ROUTES = {
   guildProgression: (guildId: string) => `/api/control/guilds/${guildId}/progression`,
   guildProgressionLeaderboard: (guildId: string) =>
     `/api/control/guilds/${guildId}/progression/leaderboard`,
+  guildProgressionMembers: (guildId: string) =>
+    `/api/control/guilds/${guildId}/progression/members`,
   guildStatistics: (guildId: string) => `/api/control/guilds/${guildId}/statistics`,
   guildTickets: (guildId: string) => `/api/control/guilds/${guildId}/tickets`,
   guildTicketQueue: (guildId: string) => `/api/control/guilds/${guildId}/tickets/queue`,

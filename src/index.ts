@@ -40,3 +40,7 @@ export * from './dashboard/enforcement';
 export * from './dashboard/publicStats';
 export * from './dashboard/userProfiles';
 export * from './dashboard/updateAnnouncements';
+
+// ── Public API (api.nyx.cool) ──
+export * from './public/api';
+export * from './public/routes';

@@ -122,3 +122,28 @@ export interface UpdateGuildProgressionResponse {
   guildId: string;
   guildConfig: ProgressionGuildConfig;
 }
+
+/**
+ * One member's progression, for an actor authorized on the guild.
+ *
+ * Distinct from `ProgressionPublicLeaderboardEntry`, which omits Discord user
+ * ids because it is served to anyone. This shape is only ever returned to
+ * someone who manages the guild, so it identifies members.
+ */
+export interface ProgressionMemberEntry {
+  userId: string;
+  rank: number;
+  level: number;
+  currentLevelXp: number;
+  nextLevelXp: number;
+  totalXp: number;
+}
+
+export interface ListGuildProgressionMembersResponse {
+  guildId: string;
+  /** Total ranked members, so callers can page without probing. */
+  total: number;
+  limit: number;
+  offset: number;
+  members: ProgressionMemberEntry[];
+}
