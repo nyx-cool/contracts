@@ -1,4 +1,4 @@
-import type { BotIdentity, GuildChannelSummary, GuildRoleSummary, UnixTimestamp } from '../common/base';
+import type { BotIdentity, GuildChannelSummary, GuildRoleSummary, PluginEmbedStyleConfig, UnixTimestamp } from '../common/base';
 import type { PluginDiagnosticState } from '../common/diagnostics';
 
 export const PROGRESSION_SETTINGS_KEY = 'progression';
@@ -19,6 +19,8 @@ export interface ProgressionAnnouncementConfig {
 }
 
 export interface ProgressionGuildConfig {
+  /** Appearance of level-up and rank embeds. */
+  embed: PluginEmbedStyleConfig;
   xpEnabled: boolean;
   xpMinGain: number;
   xpMaxGain: number;
@@ -112,6 +114,8 @@ export interface GetGuildProgressionResponse {
   diagnostics: PluginDiagnosticState | null;
   announcementPreview: ProgressionAnnouncementPreviewData;
   rankCardPreview: ProgressionRankCardPreviewData;
+  /** Gates the embed footer field, which is a nyx+ feature. */
+  premiumActive: boolean;
 }
 
 export interface UpdateGuildProgressionRequest {

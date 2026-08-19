@@ -1,4 +1,4 @@
-import type { GuildChannelSummary } from '../common/base';
+import type { GuildChannelSummary, PluginEmbedFooterConfig } from '../common/base';
 
 export interface LoggingMessagesEventsConfig {
   edits: boolean;
@@ -63,6 +63,11 @@ export interface LoggingModuleConfig<TEvents> {
 }
 
 export interface LoggingGuildConfig {
+  /**
+   * Footer only. Log embed colours encode severity (red for deletions,
+   * green for joins) and stay fixed so a channel can be scanned by colour.
+   */
+  embedFooter: PluginEmbedFooterConfig;
   enabled: boolean;
   defaultChannelId: string | null;
   modules: {
@@ -80,6 +85,8 @@ export interface GetGuildLoggingResponse {
   guildId: string;
   guildConfig: LoggingGuildConfig;
   channels: GuildChannelSummary[];
+  /** Gates the embed footer field, which is a nyx+ feature. */
+  premiumActive: boolean;
 }
 
 export interface UpdateGuildLoggingRequest {

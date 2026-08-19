@@ -1,4 +1,4 @@
-import type { GuildChannelSummary, GuildRoleSummary, UnixTimestamp } from '../common/base';
+import type { GuildChannelSummary, GuildRoleSummary, PluginEmbedStyleConfig, UnixTimestamp } from '../common/base';
 
 export type AutomodTrigger = 'message_create' | 'member_join';
 
@@ -241,6 +241,8 @@ export interface AutomodGuildConfig {
   logChannelId: string | null;
   raidMode: AutomodRaidModeSettings;
   rules: AutomodRule[];
+  /** Appearance of the notice shown when a rule fires. */
+  embed: PluginEmbedStyleConfig;
 }
 
 export interface GetGuildAutomodResponse {
@@ -250,6 +252,8 @@ export interface GetGuildAutomodResponse {
   presets: AutomodPreset[];
   channels: GuildChannelSummary[];
   roles: GuildRoleSummary[];
+  /** Gates the embed footer field, which is a nyx+ feature. */
+  premiumActive: boolean;
 }
 
 export interface UpdateGuildAutomodRequest {

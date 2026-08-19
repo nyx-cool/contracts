@@ -1,4 +1,4 @@
-import type { BotIdentity, GuildChannelSummary } from '../common/base';
+import type { BotIdentity, GuildChannelSummary, PluginEmbedStyleConfig } from '../common/base';
 
 /**
  * What the bot does to a member that posts in a honeypot (trap) channel.
@@ -17,6 +17,8 @@ export interface HoneypotWarningConfig {
 }
 
 export interface HoneypotGuildConfig {
+  /** Appearance of the offender DM and trap warning embeds. */
+  embed: PluginEmbedStyleConfig;
   /** Feature master switch (independent of whether the plugin itself is enabled). */
   enabled: boolean;
   /** Trap channels - any human message here triggers moderation. */

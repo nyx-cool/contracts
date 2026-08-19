@@ -45,6 +45,24 @@ export interface GuildEmbedBrandingConfig {
   footerIconUrl: string | null;
 }
 
+/**
+ * Per-plugin embed appearance.
+ *
+ * `footerText` is a nyx+ feature on every plugin that has one: the dashboard
+ * gates the field and the bot falls back to the plugin default when the guild
+ * is not premium, so a lapsed subscription reverts appearance rather than
+ * silently keeping it. `color` carries no such gate.
+ */
+export interface PluginEmbedStyleConfig {
+  color: number | null;
+  footerText: string | null;
+}
+
+/** For plugins whose colours carry meaning and must not be overridden. */
+export interface PluginEmbedFooterConfig {
+  footerText: string | null;
+}
+
 export interface GuildRoleSummary {
   id: string;
   name: string;
