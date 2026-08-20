@@ -234,14 +234,24 @@ export interface TicketAnalyticsVolumePoint {
   closedCount: number;
 }
 
+/**
+ * How much ticket history a guild can view. Separate from the statistics
+ * window so the two can diverge; collection is never gated either way.
+ */
+export const FREE_GUILD_TICKET_ANALYTICS_WINDOW_DAYS = 7;
+export const PREMIUM_GUILD_TICKET_ANALYTICS_WINDOW_DAYS = 30;
+
 export interface TicketAnalyticsSummary {
+  /** Every ticket ever closed, not just those inside the window. */
   totalClosedTickets: number;
+  /** Tickets inside the window that recorded a first response. */
   ticketsWithFirstResponse: number;
+  /** Averages describe the window, not all time. */
   averageFirstResponseSeconds: number | null;
   averageMessagesPerTicket: number | null;
   averageWordsPerTicket: number | null;
-  last30DaysOpenedTickets: number;
-  last30DaysClosedTickets: number;
+  windowOpenedTickets: number;
+  windowClosedTickets: number;
   /** Openers who submitted a close-time rating. Null when none exist yet. */
   ratingCount: number;
   averageRating: number | null;
@@ -252,7 +262,12 @@ export type TicketRatingDistribution = Record<'1' | '2' | '3' | '4' | '5', numbe
 
 export interface GetGuildTicketAnalyticsResponse {
   guildId: string;
+  /** False narrows `windowDays`; the payload is still populated. */
   premiumActive: boolean;
+  /** Days of history behind `summary`, `volume`, and the top lists. */
+  windowDays: number;
+  /** Days a nyx+ guild sees, so the dashboard can name what upgrading buys. */
+  fullWindowDays: number;
   summary: TicketAnalyticsSummary;
   ratingDistribution: TicketRatingDistribution;
   topCategories: TicketAnalyticsCategoryStat[];
