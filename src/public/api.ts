@@ -20,6 +20,8 @@ export const PUBLIC_API_KEY_DISPLAY_LENGTH = 12;
 export type PublicApiErrorCode =
   | 'BAD_REQUEST'
   | 'UNAUTHORIZED'
+  /** The key is valid but was not granted this scope, or this server. */
+  | 'FORBIDDEN_SCOPE'
   | 'SUBSCRIPTION_INACTIVE'
   | 'NOT_FOUND'
   | 'PLUGIN_DISABLED'
@@ -177,11 +179,56 @@ export interface GetPublicDiagnosticsResponse {
  * in the create response, and is never retrievable afterwards - only the
  * prefix is stored in a readable form.
  */
+/**
+ * What a key is permitted to ask for, chosen when it is created.
+ *
+ * These narrow, they never grant. Every request still re-resolves ownership,
+ * nyx+, and whether the plugin is enabled, so a key naming a guild the owner
+ * has since transferred reads nothing. Holding `tickets:read` on a server with
+ * tickets switched off is still a `PLUGIN_DISABLED`.
+ */
+export const PUBLIC_API_SCOPES = [
+  'guilds:read',
+  'stats:read',
+  'progression:read',
+  'tickets:read',
+  'honeypot:read',
+  'diagnostics:read',
+] as const;
+
+export type PublicApiScope = (typeof PUBLIC_API_SCOPES)[number];
+
+export function isPublicApiScope(value: unknown): value is PublicApiScope {
+  return (PUBLIC_API_SCOPES as readonly string[]).includes(value as string);
+}
+
+export const PUBLIC_API_SCOPE_LABELS: Record<PublicApiScope, string> = {
+  'guilds:read': 'Servers',
+  'stats:read': 'Statistics',
+  'progression:read': 'Progression',
+  'tickets:read': 'Tickets',
+  'honeypot:read': 'Honeypot',
+  'diagnostics:read': 'Diagnostics',
+};
+
+export const PUBLIC_API_SCOPE_DESCRIPTIONS: Record<PublicApiScope, string> = {
+  'guilds:read': 'List your servers and read one server, including its plugin list.',
+  'stats:read': 'Daily member, message, and moderation counts.',
+  'progression:read': 'Leaderboard standings and a single member\'s level and XP.',
+  'tickets:read': 'Ticket analytics and the live open ticket queue.',
+  'honeypot:read': 'Honeypot catch counts, in total and per trap channel.',
+  'diagnostics:read': 'The setup diagnostics report for a server.',
+};
+
 export interface ApiKeySummary {
   id: string;
   name: string;
   /** Leading characters of the key, for telling keys apart in a list. */
   keyPrefix: string;
+  /** What this key may ask for. Never empty: a key with no scopes reads nothing. */
+  scopes: PublicApiScope[];
+  /** Servers this key may read. Empty means every eligible server the owner owns. */
+  guildIds: string[];
   createdAt: number;
   lastUsedAt: number | null;
 }
