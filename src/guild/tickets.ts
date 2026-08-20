@@ -370,6 +370,18 @@ export interface TicketHeaderEmbedConfig {
   footerText: string | null;
 }
 
+/**
+ * How long a hosted transcript is kept before nyx deletes it.
+ *
+ * The ceiling is the product: hosting is the nyx+ half of transcripts, and a
+ * free server's copy lives on Discord as an attachment rather than here. The
+ * floor exists because a server that wants less is asking for privacy, and
+ * refusing that would be perverse.
+ */
+export const TRANSCRIPT_RETENTION_DAYS_DEFAULT = 365;
+export const TRANSCRIPT_RETENTION_DAYS_MIN = 7;
+export const TRANSCRIPT_RETENTION_DAYS_MAX = 365;
+
 export interface TicketLoggingConfig {
   channelId: string | null;
   hostTranscriptsOnWeb: boolean;
@@ -378,6 +390,8 @@ export interface TicketLoggingConfig {
   minWordCountEnabled: boolean;
   minWordCount: number | null;
   redactSensitiveFields: boolean;
+  /** Days a hosted transcript survives. Clamped to the min and max above. */
+  transcriptRetentionDays: number;
 }
 
 export interface TicketLimitsConfig {
