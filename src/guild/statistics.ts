@@ -20,6 +20,14 @@ export const GUILD_STATISTIC_METRIC_KEYS = [
 
 export type GuildStatisticMetricKey = (typeof GUILD_STATISTIC_METRIC_KEYS)[number];
 
+/**
+ * How much history a guild can view. Collection is never gated: the collector
+ * records for every guild, so a guild that upgrades sees the history it already
+ * accrued rather than starting from zero. Only the visible window differs.
+ */
+export const FREE_GUILD_STATISTICS_WINDOW_DAYS = 7;
+export const PREMIUM_GUILD_STATISTICS_WINDOW_DAYS = 30;
+
 export interface StatisticDailyPoint {
   /** UTC calendar day, YYYY-MM-DD. */
   day: string;
@@ -36,12 +44,15 @@ export interface GuildStatisticSeries {
 export interface GetGuildStatisticsResponse {
   guildId: string;
   generatedAt: UnixTimestamp;
-  /** Viewing is gated to premium guilds; false → `metrics` is empty. */
+  /** False narrows `windowDays` to the free window; `metrics` is still populated. */
   premiumActive: boolean;
   /** Enabled plugins, so the dashboard can show only relevant sections. */
   enabledPlugins: string[];
   /** Current member count (point-in-time). */
   memberCount: number;
+  /** Days of history in `metrics`, already narrowed for non-premium guilds. */
   windowDays: number;
+  /** Days a nyx+ guild sees, so the dashboard can name what upgrading buys. */
+  fullWindowDays: number;
   metrics: GuildStatisticSeries[];
 }
