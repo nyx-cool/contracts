@@ -302,7 +302,12 @@ export interface TicketTranscriptListAppliedFilters {
   channelId: string | null;
 }
 
-export type TicketStatus = 'open' | 'in_progress' | 'waiting_user' | 'resolved' | 'closed';
+/**
+ * Whose turn it is, derived from who spoke last. There is no `resolved`: on
+ * Discord, closing a ticket archives the channel, so resolution and closure are
+ * the same event and a resolved-but-open ticket cannot exist.
+ */
+export type TicketStatus = 'open' | 'in_progress' | 'waiting_user' | 'closed';
 
 export interface TicketIntakeEmbedFieldConfig {
   name: string;
