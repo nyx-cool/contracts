@@ -44,3 +44,18 @@ export interface UpdateGuildWelcomeResponse {
   guildId: string;
   guildConfig: WelcomeGuildConfig;
 }
+
+/**
+ * Posts one welcome or farewell message built from `guildConfig` (the
+ * dashboard's unsaved draft) as if the requesting actor had just joined or
+ * left. Nothing is saved.
+ */
+export interface SendGuildWelcomeTestRequest {
+  kind: 'welcome' | 'farewell';
+  guildConfig: WelcomeGuildConfig;
+}
+
+export interface SendGuildWelcomeTestResponse {
+  channelId: string;
+  messageId: string;
+}

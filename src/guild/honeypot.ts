@@ -68,3 +68,15 @@ export interface UpdateGuildHoneypotResponse {
   guildConfig: HoneypotGuildConfig;
   stats: HoneypotStats;
 }
+
+/**
+ * DMs the requesting actor the offender DM built from `guildConfig` (the
+ * dashboard's unsaved draft). Nothing is saved and nobody is moderated.
+ */
+export interface SendGuildHoneypotTestRequest {
+  guildConfig: HoneypotGuildConfig;
+}
+
+export interface SendGuildHoneypotTestResponse {
+  delivered: true;
+}

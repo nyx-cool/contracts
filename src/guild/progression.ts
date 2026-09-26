@@ -128,6 +128,20 @@ export interface UpdateGuildProgressionResponse {
 }
 
 /**
+ * Posts one level-up announcement built from `guildConfig` (the dashboard's
+ * unsaved draft) for the requesting actor, in the configured announcement
+ * channel. Nothing is saved and no XP changes.
+ */
+export interface SendGuildProgressionTestRequest {
+  guildConfig: ProgressionGuildConfig;
+}
+
+export interface SendGuildProgressionTestResponse {
+  channelId: string;
+  messageId: string;
+}
+
+/**
  * One member's progression, for an actor authorized on the guild.
  *
  * Distinct from `ProgressionPublicLeaderboardEntry`, which omits Discord user

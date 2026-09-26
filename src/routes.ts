@@ -25,8 +25,10 @@ export const CONTROL_PLANE_ROUTES = {
   guildLogging: (guildId: string) => `/api/control/guilds/${guildId}/logging`,
   guildAutomod: (guildId: string) => `/api/control/guilds/${guildId}/automod`,
   guildHoneypot: (guildId: string) => `/api/control/guilds/${guildId}/honeypot`,
+  guildHoneypotTest: (guildId: string) => `/api/control/guilds/${guildId}/honeypot/test`,
   guildAutomodRaidMode: (guildId: string) => `/api/control/guilds/${guildId}/automod/raid-mode`,
   guildProgression: (guildId: string) => `/api/control/guilds/${guildId}/progression`,
+  guildProgressionTest: (guildId: string) => `/api/control/guilds/${guildId}/progression/test`,
   guildProgressionLeaderboard: (guildId: string) =>
     `/api/control/guilds/${guildId}/progression/leaderboard`,
   guildProgressionMembers: (guildId: string) =>
@@ -39,6 +41,7 @@ export const CONTROL_PLANE_ROUTES = {
     `/api/control/guilds/${guildId}/tickets/panel-message`,
   guildEmbeds: (guildId: string) => `/api/control/guilds/${guildId}/embeds`,
   guildWelcome: (guildId: string) => `/api/control/guilds/${guildId}/welcome`,
+  guildWelcomeTest: (guildId: string) => `/api/control/guilds/${guildId}/welcome/test`,
   guildEmbedsSend: (guildId: string) => `/api/control/guilds/${guildId}/embeds/send`,
   transcripts: (guildId: string) => `/api/control/guilds/${guildId}/transcripts`,
   transcript: (transcriptId: string) => `/api/control/transcripts/${transcriptId}`,

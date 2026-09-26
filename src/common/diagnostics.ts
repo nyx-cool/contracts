@@ -41,3 +41,35 @@ export function getPluginDiagnosticStatus(
 
   return 'healthy';
 }
+
+/** Guild settings key for alerts about plugins that stop working. */
+export const HEALTH_ALERTS_SETTINGS_KEY = 'healthAlerts';
+
+export interface GuildHealthAlertsConfig {
+  /** Tell someone when a plugin's health check starts failing. */
+  enabled: boolean;
+  /** Where to post the alert. `null` sends it to the server owner's DMs. */
+  channelId: string | null;
+}
+
+export const DEFAULT_GUILD_HEALTH_ALERTS: GuildHealthAlertsConfig = {
+  enabled: true,
+  channelId: null,
+};
+
+/** Reads the stored value, falling back to the defaults for anything invalid. */
+export function readGuildHealthAlertsConfig(value: unknown): GuildHealthAlertsConfig {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    return { ...DEFAULT_GUILD_HEALTH_ALERTS };
+  }
+  const source = value as Record<string, unknown>;
+  return {
+    enabled:
+      typeof source.enabled === 'boolean' ? source.enabled : DEFAULT_GUILD_HEALTH_ALERTS.enabled,
+    channelId:
+      typeof source.channelId === 'string' && /^\d{5,}$/.test(source.channelId)
+        ? source.channelId
+        : null,
+  };
+}
+
