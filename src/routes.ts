@@ -20,6 +20,7 @@ export const CONTROL_PLANE_ROUTES = {
   guildConfig: (guildId: string) => `/api/control/guilds/${guildId}/config`,
   guildPlugins: (guildId: string) => `/api/control/guilds/${guildId}/plugins`,
   guildPluginDiagnostics: (guildId: string) => `/api/control/guilds/${guildId}/diagnostics`,
+  guildChanges: (guildId: string) => `/api/control/guilds/${guildId}/changes`,
   guildAntiPing: (guildId: string) => `/api/control/guilds/${guildId}/antiping`,
   guildStarboard: (guildId: string) => `/api/control/guilds/${guildId}/starboard`,
   guildLogging: (guildId: string) => `/api/control/guilds/${guildId}/logging`,

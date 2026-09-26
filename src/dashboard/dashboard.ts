@@ -159,6 +159,28 @@ export interface UpdateGuildConfigResponse {
   config: GuildConfigSnapshot;
 }
 
+export interface GuildChangeActor {
+  id: string;
+  /** Display name when the bot can still resolve the user. */
+  name: string | null;
+  avatarUrl: string | null;
+}
+
+/** One change made from the dashboard, newest first in lists. */
+export interface GuildChangeEntry {
+  /** Epoch ms. */
+  at: number;
+  /** Page or feature it belongs to, e.g. `honeypot`, `plugins`, `settings`. */
+  area: string;
+  /** One readable sentence, e.g. "Turned on Honeypot". */
+  summary: string;
+  actor: GuildChangeActor;
+}
+
+export interface ListGuildChangesResponse {
+  entries: GuildChangeEntry[];
+}
+
 export interface ListGuildPluginsResponse {
   plugins: PluginStatus[];
 }
